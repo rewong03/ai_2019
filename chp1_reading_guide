@@ -29,3 +29,24 @@
 ;; b. (first trial) = "a"
 ;; c. (last trial) = "sweet"
 
+;; Set 1C
+;; 20. Write a function that takes in a list of names like '(Raymond James) (Sylvia Ellen Reshak) (John Q Public)) and returns all of them who have first name 'John (assume no honorifics are used).
+(defun is-john (name)
+  (if (eq `John (first name))
+      name
+      ()))
+(defun return-john (names)
+  (apply #'append (mapcar #'is-john names)))
+;; 21. Write a function that takes in an integer and produces either half of that integer (if the input is even) or one more than three times the input (if the input is odd). Call your function COLLATZ-1. 
+(defun collatz-1 (num)
+  (if (= (rem num 2) 0)
+      (/ num 2)
+      (* num 3)))
+;; 22. Write a function that takes in an integer and produces either half of that integer (if the input is even) or one more than three times the input (if the input is odd). Call your function COLLATZ-1. 
+(defun sum-list (list)
+  (apply #'+ list))
+(defun summer (list)
+  (mapcar #'sum-list list))
+;; 23. In apply, arguments are passed in a list but in funcall the arguments are listed separately.
+;; 24. Mapcar returns the number of items in the inputted list but mappend may not.
+;; 25. A caret used to be placed over bound variables but the caret was then moved in front of the bound variable, which eventually morphed to a lambda.
