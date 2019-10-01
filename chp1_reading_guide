@@ -1,0 +1,31 @@
+;;;; Chapter 1 Reading Guide
+
+;; Set 1A
+;; 1. SBCL stands for steel bake common lisp.
+;; 2.
+;; 3. Copy-paste
+;; 4. C-x h, C-c
+;; Set 1B
+;; 5. Use Common Lisp to compute 10+30+50+80+200*30+84*97 = 14138
+(+ 10 30 50 80 (* 200 30) (* 84 97))
+;; 6. Create a list containing the following symbols: apple orange banana peach starfruit
+(defparameter num6 `(apple orange banana peach starfruit))
+;; 7. Create a list containing the following strings: "Alpha" "Bravo" "Charlie" "Delta"
+(defparameter num7 `("Alpha" "Bravo" "Charlie" "Delta"))
+;; 8. Strings have quotes while symbols don't have quotes.
+;; 9. List processing.
+;; 10. Put lists from #6 and #7 together in that order into one long list.
+(defparameter num10 (append num6 num7))
+;; 11. (length list)
+;; 12. Yes $-per-peso is a legal name.
+;; 13. You get an undefined variable error.
+;; 14. (defparameter variable value)
+;; 15. Special forms are syntactic expressions that serve as markers.
+;; 16. setf is a special function while (setf x 3) is a special form.
+;; 17. #' Is a symbol that maps a function name to the actual function.
+;; 18. ` Is a symbol that prevents an expression from being evaluated.
+;; 19. Given the list trial containing (list "a" "berry" "is" "sweet"), what is:
+;; a. (length trial) = 4
+;; b. (first trial) = "a"
+;; c. (last trial) = "sweet"
+
