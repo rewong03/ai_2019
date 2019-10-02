@@ -50,3 +50,4 @@
 ;; 23. In apply, arguments are passed in a list but in funcall the arguments are listed separately.
 ;; 24. Mapcar returns the number of items in the inputted list but mappend may not.
 ;; 25. A caret used to be placed over bound variables but the caret was then moved in front of the bound variable, which eventually morphed to a lambda.
+;; 26. A simple benifit of lambda is that it can reduce the number of unnecessary functions and variables you use. A complex benifit is that it can create new functions at run time.
