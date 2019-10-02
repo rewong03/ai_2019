@@ -1,0 +1,26 @@
+(Declaim (Optimize (debug 3)))
+(ql:quickload :lisp-unit)
+(use-package :lisp-unit)
+(defparameter *print-failures* t)
+;; Chp1 Problems
+;; Warmups
+;; 1. GREET-IZE: String -> (String->String). Take in a greeting. Return a function that takes in a name and outputs the string “greeting, name”.
+(defun greet-ize (greeting)
+  (lambda (name) (concatenate 'string greeting ", " name)))
+
+(define-test TEST-GREET-IZE 
+  "Verify you understand function-returning functions."
+  (assert-equal "Hello, Doc" (funcall (greet-ize "Hello") "Doc"))
+  (assert-equal "Goodbye, World" (funcall (greet-ize "Goodbye") "World")))
+
+;; 2. WIPE-NESTED: List -> List. Change every non-list any nested list of the input to ‘BLACK.
+(defun wipe-nested (list)
+  (cond ((null list) ())
+        ((listp (first list)) (append (list (list (wipe-nested-helper (first list)))) (wipe-nested-helper (rest list))))
+        (t (append '(Black) (wipe-nested-helper (rest list))))))
+
+(define-test TEST-WIPE
+  "Make sure the structure of the list is retained when wiping."
+  (assert-equal '(BLACK BLACK BLACK) (wipe-nested '(orange blue green)))
+  (assert-equal '(BLACK (BLACK BLACK BLACK) BLACK ((BLACK)))
+                (Wipe-Nested '(R (R G B) G ((B))))))
