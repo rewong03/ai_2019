@@ -1,0 +1,40 @@
+;; Chp3 Reading Guide
+
+;; Questions
+;; 1. The three most important maxims to me are consistency, being concise, and being specific. An example of being consistent is using
+;;    the same function and naming scheme is the same all the time. An example of being concise is doing (last some-list) vs. (rest (rest (rest .. (rest some-list)))).
+;;    They both do the same thing but doing (last some-list) is more concise. An example of being specific is using when vs. if when you only have one condition as when
+;;    is more specific to this case.
+;; 2. caddar takes the third item from the first item in a list.
+;; 3. Find is preferred because it is more concise and more abstract.
+;; 4. You can use (setq foo bar) or (setf foo bar). They both do the same thing but setq is considered more specific while setf is considered more consistent. However
+;;    regardless of which ever one you use you should always use that same function.
+
+;; Special Forms
+;; 1. defmacro, labels
+;; 2. incf takes two numbers and increments the first number by the second while decf decrements the first number by the second.
+;; 3. (defvar x 5) will set x to 5 if x has no value.
+
+;; Student
+;; 1. Write the form to define a student structure that contains name, division, id, and an optional home-phone which is set to nil if it is not available.
+(defstruct student
+  name
+  division
+  id
+  (home-phone nil))
+;; 2. Create a student with name DocMo, division A321, and id number 666321.
+(defparameter docmo (make-student :name 'DocMo
+                                  :division 'A321
+                                  :id 666321))
+;; 3. Create a student with your name, division, id number, and a home phone of 773-534-7500.
+(defparameter ryan (make-student :name 'Ryan
+                                 :division 'A141
+                                 :id 123666
+                                 :home-phone '773-534-7500))
+;; 4. To check whether v is a student you can just do (student-p v)
+;; 5. Given the student from two exercises ago, how do you make a list containing just the name and division number.
+(defparameter ryan-name-div (list (student-name ryan)
+                                  (student-division ryan)))
+;; 6. Set the division of DocMo to 934.
+(setf (student-division docmo) 'A934)
+;; 7. It is equally efficient to create the list/structure but to access items it is more efficient to use a structure.
