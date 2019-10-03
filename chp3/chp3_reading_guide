@@ -38,3 +38,34 @@
 ;; 6. Set the division of DocMo to 934.
 (setf (student-division docmo) 'A934)
 ;; 7. It is equally efficient to create the list/structure but to access items it is more efficient to use a structure.
+
+;; Conditionals
+;; 1. The most basic special form conditional is if.
+;; 2. (if good-friend nil (run-fast)) -> (unless good-friend (run-fast))
+;; 3. IDK.
+;; 4. (prin "some string")
+;; 5. Read the examples using and or or to run conditionals and then write an example that prints out “Go Fish” if the
+;;    function q19 is called with neither the color 'red nor the suit 'clubs.
+(defun q19 (color suit)
+  (and (not (eq color 'Red))
+       (not (eq suit 'Clubs))))
+;; 6. cond and if are preferred when returning values and when and unless are good for taking action.
+;; 7. The first true test is evaluated.
+(defun all-true (num)
+  "Each branch can evaluate to true if 1 is input"
+  (cond ((eq num 1)
+         1)
+        ((> 0 num)
+         2)
+        ((< 3 num)
+         3)
+        (t 4)))
+;; 8. typecase
+;; 9. Write a function that doubles any number it is given and returns only the first element if given a list.
+(defun sometimes-double (x)
+  (typecase x
+    (number (* x 2))
+    (list (first x))
+    (t "IDK")))
+
+;; 
