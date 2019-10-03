@@ -68,4 +68,12 @@
     (list (first x))
     (t "IDK")))
 
-;; 
+;; Repetition
+;; 1. mapc takes in a function and a list and applies the function to the elements but returns the inputted list rather
+;;    than the results of applying the function to the list.
+;; 2. delete takes in a value and a list and omits the values in the list that match the value. remove is similar except
+;;    it makes a copy of the list before ommiting values. There also is a remove-if and a remove-if-not that takes a predicate.
+;; 3. You can either use position or position-if.
+;; 4. length10 is a tail recursive function, meaning it completes all other operations before recursively calling itself, freeing up
+;;    memory to be used, but length9 is not tail recursive, meaning that when it recursively calls itself, there are remaining operations
+;;    that require memory to be retained.
