@@ -20,7 +20,28 @@
   (let ((sum-square-dif 0) (list-mean (mean num-list)))
     (dolist (number num-list)
       (incf sum-square-dif
-             (- number list-mean)))
+             (expt (- number list-mean) 2)))
     (sqrt (/ sum-square-dif
-             (- (length num-list) 1)))))
+             (length num-list)))))
+;; 4. Write a function HOWCOMPUTE. HOWCOMPUTE takes three numbers as input and figures out what operation would produce the third from the first two. Possible answers: ‘ADD ‘SUBTRACT ‘MULTIPLY and ‘BEATS-ME.
+(defun howcompute (a b c)
+  (cond ((= c (* a b))
+         'multiply)
+        ((= c (+ a b))
+         'add)
+        ((or (= c (- a b))
+             (= c (- b a)))
+         'subtract)
+        (t 'beats-me)))
+;; 5. Write a function that referees rock paper scissors.
+(defun play (p1 p2)
+  (cond ((equal p1 p2)
+         0)
+        ((or (and (equal p1 'scissors)
+                  (equal p2 'rock))
+             (and (equal p1 'rock)
+                  (equal p2 'paper))
+             (and (equal p1 'paper)
+                  (equal p2 'scissors)))
+         )))
 
