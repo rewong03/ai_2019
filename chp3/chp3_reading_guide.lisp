@@ -77,3 +77,41 @@
 ;; 4. length10 is a tail recursive function, meaning it completes all other operations before recursively calling itself, freeing up
 ;;    memory to be used, but length9 is not tail recursive, meaning that when it recursively calls itself, there are remaining operations
 ;;    that require memory to be retained.
+
+;; Other
+;; 1. The value of (progn 1 2 3) is 3.
+;; 2. progn is useful when evaluating a sequence of forms.
+;; 3. Doing (magic (list 5 10 40 8)) is equal to 240000. None of the values is 42 so each value gets multiplied to ans which is then multiplied to 3.
+
+;; Macros
+;; 1. Macros are essentially "forms" of code that are shorthands for larger amounts of code.
+;; 2. macroexpand-l
+
+;; Equality and sequences
+;; 1. = tests whether two numbers are the same, eq tests for the exact same object, eql is a combination of eq and =, equal tests for eql and lists, or strings,
+;;    equalp is like equal but ignores cases of letters and types of numbers.
+;; 2. nth is different form the other "getter" functions because it is the only one that takes the indice as the first value.
+;; 3. assoc searches a list for key but rassoc searches a list for value.
+;; 4. Association tables search for items one at a time which can be slow.
+;; 5. Hash tables can be used to search for values faster, but creating hash tables has a considerable overhang, so it is only useful for large tables.
+
+;; Excercises
+;; 1. Do something different depending on the type of an input. Error if not one of the choices.
+(defun e1 (some-input)
+  (etypecase some-input
+    (number 'Number!)
+    (list 'List!)))
+
+;; 2. Do something different depending on the type of an input. Error if not one of the choices.
+(defun e2 (some-list)
+  (loop for x from 0 to 2
+        collect (nth x some-list)))
+
+;; 3. Write a lambda expression equivalent to:
+;; (let* ((x 6)
+;;        (y (* x x)))
+;;   (+ x y))
+(defun e3 (x)
+  (funcall #'(lambda (x) (+ x
+                            (funcall #'(lambda (x) (* x x)) x)))
+           x))
