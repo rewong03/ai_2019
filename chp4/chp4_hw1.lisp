@@ -24,16 +24,13 @@
 ;; i. Recursion
 (defun helpPos+ (num-list)
   (if num-list
-      (let ((reverse-list (reverse num-list)))
-        (setf num-list
-              (cons (+ (first reverse-list)
-                       (- (length reverse-list) 1))
-                    (helpPos+ (reverse (rest reverse-list)))))
-        num-list)
-      '()))
+      (cons (+ (first num-list)
+               (- (length num-list) 1))
+            (helpPos+ (rest num-list)))
+      num-list))
 
 (defun recurPos+ (num-list)
-  (reverse (helpPos+ num-list)))
+  (reverse (helpPos+ (reverse num-list))))
 
 ;; ii. Iteration
 (defun iterPos+ (num-list)
