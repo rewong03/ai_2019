@@ -1,0 +1,12 @@
+(defun achieve-all (state goals
+                    &key (achieve-one #'achieve-one)
+                         (goal-stack nil)
+                         (ops *test-big-ops*))
+  (cond ((null goals)
+         state)
+        ((all-achieved goals state)
+         state)
+        ((equal (first goals)
+                (achieve-one (first goals)
+                             :remaining-goals (rest goals)
+                             :achieve-all )))
