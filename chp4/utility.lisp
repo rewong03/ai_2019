@@ -41,7 +41,14 @@
 
 (defun all-achieved (wanted got)
   "Returns got if got is a subset of wanted"
-  (subsetp got wanted))
+  (cond ((null wanted)
+         t)
+        ((member-* (first wanted)
+                   got)
+         (all-achieved (rest wanted)
+                       got))
+        (t
+         nil)))
 
 (defun apply-op (state op1)
   "Adds gain list from op1 to state and removes items from state"
