@@ -62,4 +62,4 @@
 (defun find-appropriate-1 (ops goal)
   "Returns every op in ops that immediately gains goal"
   (loop for operation in ops
-        when (member-* goal (op-gain ops)) collect operation))
+        when (member-* goal (op-gain operation)) collect operation))
