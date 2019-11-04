@@ -51,11 +51,12 @@
          state)
         (t
          (loop for operation in (find-appropriate-1 ops goal)
-               do (setf *temp* (achieve-all state
-                                            (op-prereq operation)))
+               for temp = (funcall achieve-all state (op-prereq operation))
                when (all-achieved (op-prereq operation)
-                                  *temp*)
-               return (apply-op *temp* operation)))))
+                                temp)
+               do (print (op-name operation))
+               and return (apply-op temp operation)
+               else return state))))
 
 
 
@@ -67,9 +68,6 @@
          state)
         (t
          (loop for goal in goals
-               do (setf *temp2* (achieve-one state goal))
-               when (all-achieved (list goal)
-                                  *temp2*)
-               do (setf state *temp2*)
+               do (setf state (funcall achieve-one state goal))
                finally (return state)))))
 
