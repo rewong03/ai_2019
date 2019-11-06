@@ -1,8 +1,7 @@
 (defstruct op name (prereq nil) (gain nil) (lose nil))
 
 (defparameter *test-big-ops*
-  *school-ops*)
-
+  *dessert-ops*)
 
 (defparameter *make-cake*
   (list
@@ -41,6 +40,32 @@
             :gain '(shop-has-money)
             :lose '(have-money))))
 
+(defparameter *recursive*
+  (list  (make-op :name 'get-job
+                  :prereq '(experience)
+                  :gain '(job))
+         (make-op :name 'get-experience
+                  :prereq '(job)
+                  :gain '(experience))))
+
+(defparameter *dessert-ops*
+  (list
+   (make-op :name 'free-ice-cream
+            :prereq '(ate-cake)
+            :gain '(have-ice-cream)
+            :lose '(free-ice-cream))
+   (make-op :name 'eat-ice-cream
+            :prereq '(have-ice-cream)
+            :gain '(ate-dessert ate-ice-cream)
+            :lose '(have-ice-cream))
+   (make-op :name 'eat-cake
+            :prereq '(have-cake)
+            :gain '(ate-cake ate-dessert)
+            :lose '(have-cake))
+   (make-op :name 'buy-ice-cream
+            :gain '(have-ice-cream))
+   (make-op :name 'buy-cake
+            :gain '(have-cake))))
 
 (defun achieve-one (state goal
                     &key (remaining-goals nil)
@@ -51,14 +76,15 @@
          state)
         (t
          (loop for operation in (find-appropriate-1 ops goal)
-               for temp = (funcall achieve-all state (op-prereq operation))
+               for temp = (achieve-all state (op-prereq operation))
                when (all-achieved (op-prereq operation)
-                                temp)
+                                  temp)
+               if (member goal temp)
+               return temp
+               else
                do (print (op-name operation))
                and return (apply-op temp operation)
                else return state))))
-
-
 
 (defun achieve-all (state goals
                     &key (achieve-one #'achieve-one)
@@ -68,6 +94,6 @@
          state)
         (t
          (loop for goal in goals
-               do (setf state (funcall achieve-one state goal))
+               do (setf state (funcall achieve-one state goal
+                                       ))
                finally (return state)))))
-
