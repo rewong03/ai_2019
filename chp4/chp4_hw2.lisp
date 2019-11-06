@@ -1,7 +1,7 @@
 (defstruct op name (prereq nil) (gain nil) (lose nil))
 
 (defparameter *test-big-ops*
-  *dessert-ops*)
+  *recursive*)
 
 (defparameter *make-cake*
   (list
@@ -74,9 +74,12 @@
                          (achieve-all #'achieve-all))
   (cond ((all-achieved (list goal) state)
          state)
+        ((member goal goal-stack)
+         state)
         (t
          (loop for operation in (find-appropriate-1 ops goal)
-               for temp = (achieve-all state (op-prereq operation))
+               for temp = (funcall achieve-all state (op-prereq operation)
+                                   :goal-stack goal-stack)
                when (all-achieved (op-prereq operation)
                                   temp)
                if (member goal temp)
@@ -95,5 +98,6 @@
         (t
          (loop for goal in goals
                do (setf state (funcall achieve-one state goal
-                                       ))
+                                       :goal-stack (append (list goal)
+                                                           goal-stack)))
                finally (return state)))))
