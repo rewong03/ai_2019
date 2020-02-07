@@ -36,8 +36,10 @@
    the goal, and a successor function. Returns the first path it finds."
   (let* ((path (first state))
          (node (first path)))
+    (print path)
     (cond ((equalp goal node)
-           (append path good-paths))
+           (progn (print 'here)
+                  (append path good-paths)))
           ((null state)
            (min-dist good-paths))
           ((null (funcall successor path))
@@ -55,7 +57,7 @@
 (defun breadth-first-search (state goal
                              &key (successor #'binary-tree)
                                   (good-paths '()))
-  (breadth-first-search state goal :successor successor :good-paths good-paths))
+  (breadth-first-search-helper (list state) goal :successor successor :good-paths good-paths))
 
 (defstruct (city (:type list)) name long lat)
 (defparameter *cities*
